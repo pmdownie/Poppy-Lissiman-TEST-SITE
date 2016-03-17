@@ -181,6 +181,23 @@
         {% endpaginate %}
       {% endif %}
 
+      <div class="grid__item">
+        <h6>Related Products</h6>
+        <div class="grid blog-products">
+          {% for product in collections.blog.products %}
+
+            {% include 'product-grid-item-blog' %}
+
+          {% endfor %} 
+        </div>
+      </div>
+
+      <script>
+        jQuery(function() {
+          jQuery('.blog-products .product').pick(3);
+        });
+      </script>
+
     </article>
 
     <aside class="grid__item large--one-third" role="complementary">
