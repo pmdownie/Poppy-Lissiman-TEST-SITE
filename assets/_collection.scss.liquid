@@ -1,0 +1,119 @@
+.filter {
+    padding-top: 47px;
+}
+
+.coll-filter,
+select.coll-filter {
+    width: 100%;
+    height: 35px;
+    border: 4px solid #077cff;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #077cff;
+    padding-left: 12px;
+    padding-top: 2px;
+    background-image: url('https://cdn.shopify.com/s/files/1/1087/1054/t/2/assets/filter-down.png?4534834210000004863');
+    background-repeat: no-repeat;
+    background-position: 96% center;
+    cursor: pointer;
+    font-family: "futura-pt", sans-serif;
+    border-radius: 0;
+}
+
+.coll-filter.coll-dropdown-open {
+	background-image: url('https://cdn.shopify.com/s/files/1/1087/1054/t/2/assets/filter-up.png?9925170344614093451');
+}
+
+.coll-dropdown {
+    position: absolute;
+    width: calc(1070px * 0.25 - 30px);
+    margin-left: -16px;
+    background-color: #ef4315;
+    margin-top: 7px;
+    height: 0;
+    overflow: hidden;
+    -webkit-transition: height 500ms ease;
+    -moz-transition: height 500ms ease;
+    -o-transition: height 500ms ease;
+    transition: height 500ms ease;
+}
+
+.coll-filter.coll-dropdown-open .coll-dropdown {
+	height: initial;
+}
+
+.coll-dropdown-child {
+	margin-bottom: 0;
+}
+
+.coll-dropdown-child a {
+    padding: 4px 0 4px 16px;
+    display: block;
+    color: #fff;
+}
+
+.coll-dropdown-child a:hover {
+	background-color: #d93d13;
+}
+
+.product-grid {
+	margin-top: 25px;
+}
+
+.product-grid .grid__item {
+	padding-bottom: 25px;
+}
+
+.product-grid .h6 {
+	margin-bottom: 0;
+    margin-top: 8px;
+}
+
+.product-grid .h6 {
+	color: #111;
+	letter-spacing: 1px;
+}
+
+.collection-image {
+    transition: all 0.25s ease;
+}
+
+.collection-product a:hover .collection-image {
+    -webkit-transform: translateY(-7px);
+    -moz-transform: translateY(-7px);
+    -ms-transform: translateY(-7px);
+    -o-transform: translateY(-7px);
+    transform: translateY(-7px);
+    opacity: 0.85;
+}
+
+.collection-product a:hover .h6 {
+    color: #ef4315;
+}
+
+@media only screen and (max-width: 768px) {
+    .template-collection .grid--rev {
+        margin-left: -30px;
+    }
+
+    .filter {
+        padding-top: 12px;
+    }
+
+    .coll-dropdown {
+        position: relative;
+        width: 100%;
+    }
+    .product-grid {
+        margin-top: 12px;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    
+}
+
+
+
+
