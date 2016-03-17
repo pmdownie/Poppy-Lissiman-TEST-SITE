@@ -1,0 +1,76 @@
+<!-- /snippets/blog-sidebar.liquid -->
+
+<div class="tabs">
+  <ul class="tab-links">
+    <li class="active"><a href="#tab1">{{ 'blogs.sidebar.recent_articles' | t }}</a></li>
+    <li><a href="#tab2">{{ 'blogs.sidebar.categories' | t }}</a>  </li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="tab1" class="tab active">
+      {% comment %}
+        Recent blog posts
+      {% endcomment %}
+      <div id="recent-articles" class="blog-sidebar__section recent-articles">
+        <div class="blog-sidebar__tab-body">
+            {% for article in blogs[blog.handle].articles limit:6 %}
+            <div class="grid--full">
+              <div class="grid__item one-third">
+                <a href="{{ article.url }}"><img src="{{ article.image.src | img_url: 'small' }}"></a>
+              </div>
+              <div class="grid__item two-thirds recent-articles-title">
+                <a href="{{ article.url }}">{{ article.title }}</a>
+                
+                <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: format: 'month_day_year' }}</time>
+              </div>
+
+            </div>  
+            {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <div id="tab2" class="tab">
+      {% comment %}
+        Blog tags
+      {% endcomment %}
+      {% if blog.all_tags.size > 0 %}
+      <div id="categories" class="blog-sidebar__section">
+        <div class="blog-sidebar__tab-body">
+          <ul class="no-bullets tags">
+            {% for tag in blog.all_tags %}
+              {% if current_tags contains tag %}
+              <li>{{ tag }}</li>
+              {% else %}
+              <li>{{ tag | link_to_tag: tag }}</li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+  
+  
+
+
+
+
+<script>
+$(document).ready(function() {
+    $('.tabs .tab-links a').on('click', function(e)  {
+        var currentAttrValue = $(this).attr('href');
+ 
+        // Show/Hide Tabs
+        $('.tabs ' + currentAttrValue).show().siblings().hide();
+ 
+        // Change/remove current tab to active
+        $(this).parent('li').addClass('active').siblings().removeClass('active');
+ 
+        e.preventDefault();
+    });
+});
+</script>

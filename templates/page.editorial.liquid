@@ -1,0 +1,78 @@
+<div class="wrapper">
+
+
+  <div class="grid">
+    <div class="grid__item">
+      <h1>Editorial</h1>
+    </div>
+  </div>
+
+  <div class="grid editorial-features">
+    {% for article in blogs.editorial.articles limit:1 %}
+      <div class="grid__item large--two-thirds editorial-post-home">
+        <a href="{{ article.url }}"><img src="{{ article.image.src | img_url: 'master' }}"></a>
+        {% include 'tags-article' %}
+        <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
+        <div class="rte">
+          {% if article.excerpt.size > 0 %}
+            <p>{{ article.excerpt }}</p>
+          {% else %}
+            <p>{{ article.content | strip_html | truncatewords: 100 }}</p>
+          {% endif %}
+        </div>
+        {% capture author %}<strong>{{ article.author }}</strong>{% endcapture %}
+        {% capture date %}<time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: format: 'month_day_year' }}</time>{% endcapture %}
+        <p class="blog-meta">{{ 'blogs.article.author_on_date_html' | t: author: author, date: date }}</p>
+
+        {% unless forloop.last %}<hr>{% endunless %}
+      </div>
+    {% endfor %}
+      <div class="grid__item large--one-third">
+        {% include 'blog-sidebar' %}
+      </div>
+  </div>
+
+  <div class="grid editorial-features">
+    {% for article in blogs.editorial.articles offset:1 limit:2 %}
+      <div class="grid__item large--one-half editorial-post-home">
+        <a href="{{ article.url }}"><img src="{{ article.image.src | img_url: 'master' }}"></a>
+        {% include 'tags-article' %}
+        <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
+        <div class="rte">
+          {% if article.excerpt.size > 0 %}
+            <p>{{ article.excerpt }}</p>
+          {% else %}
+            <p>{{ article.content | strip_html | truncatewords: 100 }}</p>
+          {% endif %}
+        </div>
+        {% capture author %}<strong>{{ article.author }}</strong>{% endcapture %}
+        {% capture date %}<time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: format: 'month_day_year' }}</time>{% endcapture %}
+        <p class="blog-meta">{{ 'blogs.article.author_on_date_html' | t: author: author, date: date }}</p>
+
+        {% unless forloop.last %}<hr>{% endunless %}
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="grid editorial-older-posts">
+    {% for article in blogs.editorial.articles offset:3 %}
+      <div class="grid__item large--one-quarter editorial-post">
+        <a href="{{ article.url }}"><img src="{{ article.image.src | img_url: 'master' }}"></a>
+        {% include 'tags-article' %}
+        <h5><a href="{{ article.url }}">{{ article.title }}</a></h5>
+        <div class="rte">
+          {% if article.excerpt.size > 0 %}
+            <p>{{ article.excerpt | truncatewords: 35 }}</p>
+          {% else %}
+            <p>{{ article.content | strip_html | truncatewords: 50 }}</p>
+          {% endif %}
+        </div>
+        {% capture author %}<strong>{{ article.author }}</strong>{% endcapture %}
+        {% capture date %}<time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: format: 'month_day_year' }}</time>{% endcapture %}
+        <p class="blog-meta">{{ 'blogs.article.author_on_date_html' | t: author: author, date: date }}</p>
+
+        {% unless forloop.last %}<hr>{% endunless %}
+      </div>
+    {% endfor %}
+  </div>
+</div>

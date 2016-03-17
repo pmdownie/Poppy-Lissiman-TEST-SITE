@@ -1,0 +1,43 @@
+
+{% paginate blogs[blog.style].articles by 5 %}
+
+<div class="style-blog-background">
+
+  <div class="wrapper home-block">
+
+    <img class="centered style-blog-title" src="{{ 'style-blog-title.png' | asset_url }}">
+
+    <div id="styleBlog"class="grid masonary-grid">
+
+      {% for article in blogs.style.articles %}
+        <div class="grid__item style-post-home style-post left">
+
+          <div class="style-post-header">
+            <span class="browser-dot red-dot"></span>
+            <span class="browser-dot yellow-dot"></span>
+            <span class="browser-dot green-dot"></span>
+          </div>
+
+          {% if article.content contains "<img" %}
+            {% assign src = article.content | split: 'src="' %}
+            {% assign src = src[1] | split: '"' | first | replace: '//cdn', 'http://cdn';; | replace: 'http:http://';;, 'http://';; | remove: 'https:' %}
+              <a href="{{ src }}">
+                <img src="{{ src }}" >
+              </a>
+          {% endif %}
+
+        </div>
+      {% endfor %}
+    </div>
+
+    {% if paginate.pages > 1 %}
+      <hr>
+      <div class="pagination">
+        {{ paginate | default_pagination | replace: '&laquo; Previous', '&larr;' | replace: 'Next &raquo;', '&rarr;' }}
+      </div>
+    {% endif %}
+
+  </div>
+
+</div>
+{% endpaginate %}

@@ -1,0 +1,90 @@
+<header class="site-header" role="banner">
+  <div class="grid--full grid--table">
+
+    <div class="left logo-container">
+      <div class="logo-wrapper left">
+        {% if template == 'index' %}
+          <h1 class="site-header__logo large--left" itemscope itemtype="http://schema.org/Organization">
+        {% else %}
+          <div class="h1 site-header__logo large--left" itemscope itemtype="http://schema.org/Organization">
+        {% endif %}
+          {% if settings.logo_use_image %}
+            <a href="/" itemprop="url" class="site-header__logo-link site-nav__link">
+              <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo">
+            </a>
+          {% else %}
+            <a href="/" itemprop="url">{{ shop.name }}</a>
+          {% endif %}
+        {% if template == 'index' %}
+          </h1>
+        {% else %}
+        </div>
+        {% endif %}
+    </div>
+    <button type="button" class="icon-fallback-text site-nav__link nav-drawer-link js-drawer-open-left right" aria-controls="NavDrawer" aria-expanded="false">
+        <span class="icon icon-hamburger" aria-hidden="true"></span>
+        <span class="fallback-text">{{ 'layout.navigation.menu' | t }}</span>
+    </button>
+  </div>
+
+   <!-- View Products -->
+    <div class="medium-down--hide left border-products account-tab">
+      <a href="/collections/all">
+        <div id="#viewProducts" class="header__item">
+          <span class="header_item_padding left">View Products</span>
+          <img class="view-proucts-icon left" src="{{ 'view-product-icon.png' | asset_url }}" alt="View Products Icon">
+        </div>
+      </a>
+    </div>
+
+    <!-- Cart -->
+    <div class="right large--text-right header__item cart-tab">
+    {% comment %}
+      Show number of items in the cart and total cost in the /cart link
+
+      Ajax Cart Notes:
+        - #cartCount updates the total number of items in the cart
+        - #cartCost updates the total cost of the cart
+        - Documentation:  http://shopify.com/timber#ajax-cart
+    {% endcomment %}
+      <a href="/cart" class="site-header__cart-toggle js-drawer-open-right" aria-controls="CartDrawer" aria-expanded="false">
+        <span class="header_item_padding">{{ 'layout.cart.title' | t }}
+        (<span id="CartCount">{{ cart.item_count }}</span>)</span>
+        <img class="cart-icon" src="{{ 'cart-icon.png' | asset_url }}" alt="Cart Icon">
+      </a>
+    </div>
+
+    <!-- Currency Picker -->
+    <div class="medium-down--hide right border-grey">
+      <div class="header__item">
+        {% include 'currency-picker' %}
+      </div>
+    </div>  
+
+    <!-- Accounts -->
+    <div class="medium-down--hide right border-grey before">
+      <div class="header__item account">
+        {% comment %}
+          If customer accounts are enabled, provide login and create account links
+        {% endcomment %}
+        {% if shop.customer_accounts_enabled %}
+          <div class="header_item_padding left">
+            {% if customer %}
+              {% if customer.first_name != blank %}
+                {% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
+                <a href="/account">{{ customer.first_name }}</a>
+              {% else %}
+                <a href="/account">{{ 'layout.customer.account' | t }}</a>
+              {% endif %}
+              | {{ 'layout.customer.log_out' | t | customer_logout_link }}
+            {% else %}
+              {{ 'My Account' | customer_login_link }}
+            {% endif %}
+          </div>
+        {% endif %}
+        <img class="account-icon left" src="{{ 'account-icon.png' | asset_url }}" alt="Account Icon">
+      </div>
+    </div>
+
+  </div>
+</header>

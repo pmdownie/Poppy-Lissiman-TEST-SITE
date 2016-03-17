@@ -1,0 +1,11 @@
+$(document).ready( function(){
+	var currency = $('.currency-picker option');
+
+	$('currency').each(function() {
+		var value = $('this').val();
+		var money = value + '.png';
+		var moneyImg = 'http://whildestudios.com/images/pl/' + money;
+		$('this').html('<img src="'+ moneyImg +'">');
+	});
+
+});

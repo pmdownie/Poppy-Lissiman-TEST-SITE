@@ -1,0 +1,115 @@
+<div id="NavDrawer" class="drawer drawer--left">
+    <!-- begin nav -->
+    <nav>
+      <div class="desktop-nav small--hide">
+        <ul class="desktop-nav first-list">
+          <li class="desktop-nav__item big-padding"><a href="/collections/all" class="desktop-nav__link">Shop</a></li>
+          <li class="nav-has-children">
+            <ul class="desktop-child-nav">
+              {% for link in linklists.collections.links %}
+                <li class="desktop-child-nav__item">
+                  <a href="{{ link.url }}" class="desktop-child-nav__link">{{ link.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </li>
+        </ul>
+
+        <ul class="desktop-nav background-color-white">
+          <li class="desktop-nav__item big-padding"><a href="/blogs/editorial">Read</a></li>
+          <li class="desktop-nav__img">
+            {% for article in blogs.editorial.articles limit:1 %}
+              <a href="/blogs/editorial">
+                <div class="nav__img" style="background-image:url('{{ article.image.src | img_url:'master' }}');"></div>
+              </a>
+              <a href="/blogs/editorial"><p>{{ article.title }}</p></a>  
+            {% endfor %}
+          </li>
+        </ul>
+
+        <ul class="desktop-nav main-nav">
+          {% for link in linklists.main-menu.links %}
+            <li class="desktop-nav__item">
+              <a href="{{ link.url }}" class="desktop-nav__link">{{ link.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+
+        <ul class="desktop-nav desktop-sub-nav">
+          {% for link in linklists.sub-menu.links %}
+            <li class="desktop-nav__item">
+              <a href="{{ link.url }}" class="desktop-nav__link">{{ link.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+
+
+
+
+
+      <!-- //mobile-nav -->
+      <div class="mobile-nav-container small--show">
+        <ul class="mobile-nav">
+          {% for link in linklists.mobile-nav.links %}
+            {% comment %}
+              Create a dropdown menu by naming a linklist the same as a link in the parent nav
+
+              More info on dropdowns:
+                - http://docs.shopify.com/manual/your-website/navigation/create-drop-down-menu
+            {% endcomment %}
+            {% assign child_list_handle = link.title | handleize %}
+            {% if linklists[child_list_handle].links != blank %}
+              <li class="mobile-nav__item {{ link.title }}" aria-haspopup="true">
+                <div class="mobile-nav__has-sublist">
+                  <a href="{{ link.url }}" class="mobile-nav__link">{{ link.title }}</a>
+                  <div class="mobile-nav__toggle">
+                    <button type="button" class="icon-fallback-text mobile-nav__toggle-open">
+                      <span class="icon icon-plus" aria-hidden="true"></span>
+                      <span class="fallback-text">See More</span>
+                    </button>
+                    <button type="button" class="icon-fallback-text mobile-nav__toggle-close">
+                      <span class="icon icon-minus" aria-hidden="true"></span>
+                      <span class="fallback-text">{{ 'cart.general.close_cart' | t | json }}</span>
+                    </button>
+                  </div>
+                </div>
+                <ul class="mobile-nav__sublist">
+                  {% for childlink in linklists[child_list_handle].links %}
+                    <li class="mobile-nav__item">
+                      <a href="{{ childlink.url }}" class="mobile-nav__link">{{ childlink.title | escape }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </li>
+            {% else %}
+              <li class="mobile-nav__item {{ link.title }}">
+                <a href="{{ link.url }}" class="mobile-nav__link">{{ link.title }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
+          
+          {% if shop.customer_accounts_enabled %}
+            <li class="mobile-nav__item Account">
+              <div class="left">
+                {% if customer %}
+                  {% if customer.first_name != blank %}
+                    {% capture first_name %}<a href="/account">{{ customer.first_name }}</a>{% endcapture %}
+                    <a href="/account">{{ customer.first_name }}</a>
+                  {% else %}
+                    <a href="/account">{{ 'layout.customer.account' | t }}</a>
+                  {% endif %}
+                  | {{ 'layout.customer.log_out' | t | customer_logout_link }}
+                {% else %}
+                  {{ 'My Account' | customer_login_link }}
+                {% endif %}
+              </div>
+              <img class="account-icon left" src="{{ 'account-icon.png' | asset_url }}" alt="Account Icon">
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+      <!-- //mobile-nav -->
+    </nav>
+  </div>

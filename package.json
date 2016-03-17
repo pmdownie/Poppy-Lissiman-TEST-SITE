@@ -1,0 +1,16 @@
+{
+  "name": "poppy-lissiman-theme",
+  "version": "1.0.0",
+  "description": "E-commerce store for Poppy Lissiman",
+  "main": "index.js",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-cssimport": "^3.0.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "",
+  "license": "ISC"
+}

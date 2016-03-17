@@ -1,0 +1,80 @@
+<!-- /templates/index.liquid -->
+
+<div class="main-slider-slick">
+  <div class="home-slide" style="background-color:{{ settings.first_slide_background_color }}; background-image:url('{{ 'first_slide_background_image.jpg' | asset_url }}');">
+    <a href="{{ settings.first_slide_link }}">
+      <img class="slider-image" src="{{ 'first_slide_image.png' | asset_url }}" alt="">
+      <h2 class="slider-title" style="color:{{ settings.first_slide_text_color }};">{{ settings.first_slide_text }}</h2>
+    </a>
+  </div>
+  <div class="home-slide" style="background-color:{{ settings.second_slide_background_color }}; background-image:url('{{ 'second_slide_background_image.jpg' | asset_url }}');">
+    <a href="{{ settings.second_slide_link }}">
+      <img class="slider-image" src="{{ 'second_slide_image.png' | asset_url }}" alt="">
+      <h2 class="slider-title" style="color:{{ settings.second_slide_text_color }};">{{ settings.second_slide_text }}</h2>
+    </a>
+  </div>
+  <div class="home-slide" style="background-color:{{ settings.third_slide_background_color }}; background-image:url('{{ 'third_slide_background_image.jpg' | asset_url }}');">
+    <a href="{{ settings.third_slide_link }}">
+      <img class="slider-image" src="{{ 'third_slide_image.png' | asset_url }}" alt="">
+      <h2 class="slider-title" style="color:{{ settings.third_slide_text_color }};">{{ settings.third_slide_text }}</h2>
+    </a>
+  </div>
+</div>
+
+<hr>
+
+<div class="wrapper home-block">
+  <div class="grid">
+
+    {% for article in blogs.editorial.articles limit:2 %}
+      <div class="grid__item large--one-half editorial-post-home">
+        <a href="{{ article.url }}" class="image-hover-up"><img src="{{ article.image.src | img_url: 'master' }}"></a>
+        {% include 'tags-article' %}
+        <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
+        <div class="rte">
+          {% if article.excerpt.size > 0 %}
+            <p>{{ article.excerpt }}</p>
+          {% else %}
+            <p>{{ article.content | strip_html | truncatewords: 100 }}</p>
+          {% endif %}
+        </div>
+        {% capture author %}<strong>{{ article.author }}</strong>{% endcapture %}
+        {% capture date %}<time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: format: 'month_day_year' }}</time>{% endcapture %}
+        <p class="blog-meta">{{ 'blogs.article.author_on_date_html' | t: author: author, date: date }}</p>
+
+        {% unless forloop.last %}<hr>{% endunless %}
+      </div>
+    {% endfor %}
+
+    <a href="/blogs/editorial" class="pl-button blue-button text-center centered home-button-padding">Read More</a>
+
+  </div>
+</div>
+
+<hr>
+
+<div class="style-blog-background">
+  <img src="{{ 'arm3.png' | asset_url }}" id="arm-two" class="home-arm">
+  <div class="wrapper home-block">
+    <img class="centered style-blog-title" src="{{ 'style-blog-title.png' | asset_url }}">
+    <div id="styleBlog"class="grid masonary-grid">
+      {% for article in blogs.style.articles limit:6 %}
+        <div class="grid__item style-post-home style-post left">
+          <div class="style-post-header"><span class="browser-dot red-dot"></span><span class="browser-dot yellow-dot"></span><span class="browser-dot green-dot"></span></div>
+          {% if article.content contains "<img" %}
+            {% assign src = article.content | split: 'src="' %}
+            {% assign src = src[1] | split: '"' | first | replace: '//cdn', 'http://cdn';; | replace: 'http:http://';;, 'http://';; | remove: 'https:' %}
+              <a href="{{ src }}">
+                <img src="{{ src }}" >
+              </a>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+    <a href="/pages/style" class="pl-button yellow-button text-center centered home-button-padding button-bottom-padding">View More</a>
+  </div>
+</div>
+
+<hr>
+
+<img src="{{ 'arm1.png' | asset_url }}" id="arm-one" class="home-arm">

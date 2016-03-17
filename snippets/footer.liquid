@@ -1,0 +1,42 @@
+    <!-- begin site-footer -->
+    <footer class="site-footer small--text-center" role="contentinfo">
+        <div class="grid">
+        <div class="grid__item large--one-half footer-menu">
+          <ul>
+            {% for link in linklists.footer.links %}
+              <li class="footer-nav__item footer-padding">
+                <a href="{{ link.url }}" class="footer-nav__link">{{ link.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+
+
+
+
+          {% if settings.footer_newsletter_enable %}
+            <div class="grid__item large--one-quarter push--large--one-quarter medium--one-quarter padding-right">
+              {% comment %}
+                MailChimp is the go-to newsletter service for Shopify.
+                Use the link below to find your MailChimp form action
+                and insert it in your site settings.
+
+                MailChimp newsletter integration and requirement:
+                 - http://docs.shopify.com/support/configuration/store-customization/where-do-i-get-my-mailchimp-form-action
+              {% endcomment %}
+              {% if settings.newsletter_form_action != blank %}
+                {% assign form_action = settings.newsletter_form_action %}
+              {% else %}
+                {% assign form_action = '#' %}
+              {% endif %}
+              <form action="{{ form_action }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" class="input-group footer-padding-small">
+                <input type="email" value="{% if customer %}{{ customer.email }}{% endif %}" placeholder="Join Our Mailing List" name="EMAIL" id="mail" class="input-group-field" aria-label="{{ 'general.newsletter_form.newsletter_email' | t }}" autocorrect="off" autocapitalize="off">
+                <span class="input-group-btn">
+                  <input type="submit" class="btn" name="subscribe" id="subscribe" value="Join">
+                </span>
+              </form>
+            </div>
+          {% endif %}
+        </div>
+    </footer>
+    <!-- //site-footer -->

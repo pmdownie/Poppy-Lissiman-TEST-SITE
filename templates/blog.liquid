@@ -1,0 +1,105 @@
+<!-- /templates/blog.liquid -->
+{% comment %}
+
+  Loop through a defined number of articles with the 'paginate' tag.
+  Don't forget to close the tag after your loop.
+
+{% endcomment %}
+
+{% paginate blog.articles by 30 %}
+
+{% comment %}
+  This template is also used for listing out articles of a specific tag.
+  You can change layouts or styles by checking if current_tags is true.
+{% endcomment %}
+<div class="wrapper">
+  <div class="grid--rev">
+
+    <div class="grid__item blog-content blog-section__margin-bottom">
+      <div class="grid editorial-features">
+        {% for article in blog.articles limit:1 %}
+          <div class="grid__item large--two-thirds editorial-post-home">
+            <a href="{{ article.url }}" class="image-hover-up"><img src="{{ article.image.src | img_url: 'master' }}"></a>
+            {% include 'tags-article' %}
+            <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
+            <div class="rte">
+              {% if article.excerpt.size > 0 %}
+                <p>{{ article.excerpt }}</p>
+              {% else %}
+                <p>{{ article.content | strip_html | truncatewords: 100 }}</p>
+              {% endif %}
+            </div>
+            {% capture author %}<strong>{{ article.author }}</strong>{% endcapture %}
+            {% capture date %}<time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: format: 'month_day_year' }}</time>{% endcapture %}
+            <p class="blog-meta">{{ 'blogs.article.author_on_date_html' | t: author: author, date: date }}</p>
+
+            {% unless forloop.last %}<hr>{% endunless %}
+          </div>
+        {% endfor %}
+          <div class="grid__item large--one-third">
+            {% include 'blog-sidebar' %}
+          </div>
+      </div>
+    </div>
+
+    <div class="grid__item blog-section__margin-bottom">
+      <div class="grid editorial-features">
+        {% for article in blog.articles offset:1 limit:2 %}
+          <div class="grid__item large--one-half editorial-post-home">
+            <a href="{{ article.url }}" class="image-hover-up"><img src="{{ article.image.src | img_url: 'master' }}"></a>
+            {% include 'tags-article' %}
+            <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
+            <div class="rte">
+              {% if article.excerpt.size > 0 %}
+                <p>{{ article.excerpt }}</p>
+              {% else %}
+                <p>{{ article.content | strip_html | truncatewords: 100 }}</p>
+              {% endif %}
+            </div>
+            {% capture author %}<strong>{{ article.author }}</strong>{% endcapture %}
+            {% capture date %}<time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: format: 'month_day_year' }}</time>{% endcapture %}
+            <p class="blog-meta">{{ 'blogs.article.author_on_date_html' | t: author: author, date: date }}</p>
+
+            {% unless forloop.last %}<hr>{% endunless %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="grid__item">
+      <div class="grid editorial-older-posts">
+        {% for article in blog.articles offset:3 %}
+          <div class="grid__item large--one-quarter editorial-post">
+            <a href="{{ article.url }}" class="image-hover-up"><img src="{{ article.image.src | img_url: 'large' }}"></a>
+            {% include 'tags-article' %}
+            <h5><a href="{{ article.url }}">{{ article.title }}</a></h5>
+            <div class="rte">
+              {% if article.excerpt.size > 0 %}
+                <p>{{ article.excerpt | truncatewords: 25 }}</p>
+              {% else %}
+                <p>{{ article.content | strip_html | truncatewords: 50 }}</p>
+              {% endif %}
+            </div>
+            {% capture author %}<strong>{{ article.author }}</strong>{% endcapture %}
+            {% capture date %}<time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: format: 'month_day_year' }}</time>{% endcapture %}
+            <p class="blog-meta">{{ 'blogs.article.author_on_date_html' | t: author: author, date: date }}</p>
+
+            {% unless forloop.last %}<hr>{% endunless %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="grid__item center">
+      {% if paginate.pages > 1 %}
+        <hr>
+        <div class="pagination">
+          {{ paginate | default_pagination | replace: '&laquo; Previous', '&larr;' | replace: 'Next &raquo;', '&rarr;' }}
+        </div>
+      {% endif %}
+    </div>
+
+  </div>
+</div>
+
+{% endpaginate %}

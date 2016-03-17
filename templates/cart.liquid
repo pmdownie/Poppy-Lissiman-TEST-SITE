@@ -1,0 +1,73 @@
+<!-- /templates/cart.liquid -->
+{% comment %}
+
+  For info on test orders:
+    - General http://docs.shopify.com/manual/your-store/orders/test-orders
+    - Shopify Payments - http://docs.shopify.com/manual/more/shopify-payments/testing-shopify-payments
+
+{% endcomment %}
+<div class="wrapper">
+{% if cart.item_count > 0 %}
+
+
+  <h1 class="h2">Shopping Bag</h1>
+  <form action="/cart" method="post" novalidate class="cart table-wrap">
+    <table>
+      <tbody>
+        <tr class="cart__row table__section">
+          {% for item in cart.items %}
+            <td data-label="{{ 'customer.order.product' | t }}">
+            <div class="cart-item">
+              <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="cart__remove">
+                <small><img src="{{ 'cross.png' | asset_url }}"></small>
+              </a>
+
+               {% comment %}
+                  IMAGE
+                {% endcomment %}
+              <a href="{{ item.url | within: collections.all }}" class="cart__image"><img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}"></a>
+              <a href="{{ item.url }}" class="h6">{{ item.product.title }}</a>
+              <span data-label="{{ 'cart.label.price' | t }}" class="block">Price: {{ item.price | money }}</span>
+              <span data-label="{{ 'cart.label.quantity' | t }}" class="block">Quantity: {{ item.quantity }}</span>
+              <strong><span data-label="{{ 'cart.label.total' | t }}" class="block">Total: {{ item.line_price | money }}</span></strong>
+              </div>
+            </td>
+        {% endfor %}
+        </tr>
+      </tbody>
+    </table>
+    <div class="grid cart__row checkout_row">
+      <div class="grid__item one-half small--one-whole cart-disclaimer">
+        <p><span class="want-free-shipping h6">Want Free Shipping?</span></p>
+        <p>If you spend over $200 ($250 for international sales) your shipping will be FREE!</p>
+        <a href="/index" class="pl-button-outline blue-button-outline btn-small">Continue Shopping</a>
+        <p class="margin-top">Any promotional or discount codes can be entered once you have entered the checkout.</p>
+        <p><span class="cart-disclaimer">** Poppy Lissiman process all orders in AUD. While the content of your cart is currently displayed in AUD, you will checkout using AUD at the most current exchange rate. **</span></p>
+      </div>
+      <div class="grid__item text-right one-half small--one-whole checkout">
+        <p>
+          <span class="cart__subtotal-title h6">{{ 'cart.general.subtotal' | t }}</span>
+          <span class="h3 cart__subtotal">{{ cart.total_price | money }}</span>
+        </p>
+        <p><em>{{ 'cart.general.shipping_at_checkout' | t }}</em></p>
+        <input type="submit" name="update" class="update-cart" value="{{ 'cart.general.update' | t }}">
+        <p style="float: none; text-align: right; clear: both; margin: 10px 0;">
+          <input style="float:none; vertical-align: middle;" type="checkbox" id="agree" />
+          <label style="display:inline; float:none" for="agree">
+            I agree with the <a href="/pages/terms-and-conditions">terms and conditions</a>.
+          </label>
+        </p>
+        <p><input type="submit" name="checkout" class="pl-button yellow-button" value="{{ 'cart.general.checkout' | t }}"></p>
+      </div>
+    </div>
+  </form>
+{% else %}
+  {% comment %}
+    The cart is empty
+  {% endcomment %}
+  <h2>{{ 'cart.general.title' | t }}</h2>
+  <p>{{ 'cart.general.empty' | t }}</p>
+  <p>{{ 'cart.general.continue_browsing_html' | t }}</p>
+{% endif %}
+
+</div>

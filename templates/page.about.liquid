@@ -1,0 +1,24 @@
+<!-- /templates/page.about.liquid -->
+<div class="grid">
+
+  <div class="grid__item small--ten-twelfths push--small--one-twelfth medium--ten-twelfths push--medium--one-twelfth large--two-thirds push--large--one-sixth">
+
+    <h1 class="page">{{ page.title }}</h1>
+
+    {% comment %}
+      Regular page content goes here.
+    {% endcomment %}
+    <div class="grid">
+    	<div class="grid__item large--one-half medium--one-half">
+    		<img class="about-image" src="{{ 'about_image.jpg' | asset_url }}" alt="Poppy Lissiman">
+    	</div>
+    	<div class="grid__item large--one-half medium--one-half">
+    		<div class="rte">
+		      {{ page.content }}
+		    </div>
+    	</div>
+    </div>
+
+  </div>
+
+</div>
