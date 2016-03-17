@@ -52,8 +52,10 @@
 
   {% endcomment %}
   <a href="{{ product.url | within: collection }}" class="grid__image">
-    <img src="{{ product.featured_image.src | img_url: 'large' }}" class="collection-image" alt="{{ product.featured_image.alt | escape }}">
-
+    <div class="reveal">
+      <img src="{{ product.featured_image.src | img_url: 'large' }}" class="collection-image" alt="{{ product.featured_image.alt | escape }}">
+      <img class="hidden" src="{{ product.images.last | product_img_url: 'large' }}" alt="{{ product.images.last.alt | escape }}" />
+    </div>
 
   <p class="h6">{{ product.title }}</p>
   <p>
