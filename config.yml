@@ -14,3 +14,4 @@
 - css/
 - config/settings_data.json
 - node_modules/
+- assets/[^_]*.*

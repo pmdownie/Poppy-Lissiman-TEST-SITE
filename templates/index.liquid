@@ -24,7 +24,24 @@
 <hr>
 
 <div class="wrapper home-block">
-  <div class="grid">
+  <h4 class="home-h5">Latest Products</h4>
+  <div class="grid-uniform product-grid">
+
+    {% for product in collections.feature.products %}
+
+      {% include 'product-grid-item' %}
+
+    {% endfor %} 
+
+  </div>
+      <a href="/collections/all" class="pl-button yellow-button text-center centered home-button-padding">View More</a>
+</div>
+
+<hr>
+
+<div class="home-block home-blog-block">
+  <h4 class="home-h5">Latest Stories</h4>
+  <div class="wrapper grid">
 
     {% for article in blogs.editorial.articles limit:2 %}
       <div class="grid__item large--one-half editorial-post-home">
