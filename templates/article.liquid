@@ -181,22 +181,22 @@
         {% endpaginate %}
       {% endif %}
 
-      <div class="grid__item">
-        <h6>Related Products</h6>
-        <div class="grid blog-products">
-          {% for product in collections.blog.products %}
+      <div class="grid__item blog-product-item product-grid">
+              <h5>Related Products</h5>
+              <div class="grid blog-products">
+                {% for product in collections.blog.products %}
 
-            {% include 'product-grid-item-blog' %}
+                  {% include 'product-grid-item-blog' %}
 
-          {% endfor %} 
-        </div>
-      </div>
+                {% endfor %} 
+              </div>
+            </div>
 
-      <script>
-        jQuery(function() {
-          jQuery('.blog-products .product').pick(3);
-        });
-      </script>
+            <script>
+              jQuery(function() {
+                jQuery('.blog-products .product').pick(3);
+              });
+            </script>
 
     </article>
 
