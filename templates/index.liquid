@@ -24,10 +24,10 @@
 <hr>
 
 <div class="wrapper home-block">
-  <h4 class="home-h5">Latest Products</h4>
+  <h4 class="home-h5">{{ settings.home_page_product_title }}</h4>
   <div class="grid-uniform product-grid">
 
-    {% for product in collections.feature.products %}
+    {% for product in collections.feature.products limit:8 %}
 
       {% include 'product-grid-item' %}
 
@@ -40,7 +40,7 @@
 <hr>
 
 <div class="home-block home-blog-block">
-  <h4 class="home-h5">Latest Stories</h4>
+  <h4 class="home-h5">{{ settings.home_page_blog_title }}</h4>
   <div class="wrapper grid">
 
     {% for article in blogs.editorial.articles limit:2 %}

@@ -1,7 +1,7 @@
 ---
-:api_key: 8286396bcc02b239223fea8d2a37e6a8
-:password: 53b412d011452dba61001b64c13327b0
-:store: poppy-lissiman-3.myshopify.com
+:api_key: e975c5b7699d25f58a191e50661d4537
+:password: ee5fc645e896555ab9ec1eb0b9930ef4
+:store: poppy-lissiman-2.myshopify.com
 :theme_id: 
 :whitelist_files:
 - layout/
@@ -11,7 +11,6 @@
 - templates/
 - locales/
 :ignore_files:
-- css/
+- sass/
 - config/settings_data.json
 - node_modules/
-- assets/[^_]*.*

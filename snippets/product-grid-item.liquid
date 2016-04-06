@@ -51,6 +51,12 @@
       - http://docs.shopify.com/support/your-store/collections/how-to-navigate-within-a-collection
 
   {% endcomment %}
+  {% if on_sale %}
+    <div class="on_sale">
+      <img src="{{ 'sale.gif' | asset_url }}" class="sale-gif" alt="Sale gif">
+      <span class="sale__roundal">Sale</span>
+    </div>
+  {% endif %}
   <a href="{{ product.url | within: collection }}" class="grid__image">
     <div class="reveal">
       <img src="{{ product.featured_image.src | img_url: 'large' }}" class="collection-image" alt="{{ product.featured_image.alt | escape }}">
@@ -64,20 +70,10 @@
       if your variants have different prices.
     {% endcomment %}
     {% if on_sale %}
-      {% if product.price_varies %}
-        {% assign sale_price = product.price | money %}
-        {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
-      {% else %}
         <strong>{{ 'products.product.on_sale' | t }}</strong>
         {{ product.price | money }}
-      {% endif %}
     {% else %}
-      {% if product.price_varies %}
-        {% assign price = product.price | money %}
-        {{ 'products.general.from_text_html' | t: price: price }}
-      {% else %}
         {{ product.price | money }}
-      {% endif %}
     {% endif %}
     {% if sold_out %}
       <br><strong>{{ 'products.product.sold_out' | t }}</strong>

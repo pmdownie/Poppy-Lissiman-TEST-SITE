@@ -21,9 +21,6 @@
       }
     ]
   },
-
-
-
   {
     "name": "Home Page Slider",
     "settings": [
@@ -147,8 +144,6 @@
       }
     ]
   },
-
-
   {
     "name": "Colors",
     "settings": [
@@ -296,9 +291,6 @@
       }
     ]
   },
-
-
-  
   {
     "name": "About Page",
     "settings": [
@@ -317,8 +309,6 @@
       }
     ]
   },
-
-
   {
     "name": "Cart Page",
     "settings": [
@@ -352,11 +342,42 @@
     ]
   },
   {
+    "name": "Headings",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Home Page"
+      },
+      {
+        "type": "text",
+        "id": "home_page_product_title",
+        "label": "Home Page Products Title",
+        "default": "Latest Products"
+      },
+      {
+        "type": "text",
+        "id": "home_page_blog_title",
+        "label": "Home Page Blog Title",
+        "default": "Latest Stories"
+      },
+      {
+        "type": "header",
+        "content": "Blog Article"
+      },
+      {
+        "type": "text",
+        "id": "blog_article_product_title",
+        "label": "Blog Article Product Title",
+        "default": "Related Products"
+      }
+    ]
+  },
+  {
     "name": "Currency",
     "settings": [
       {
         "type": "paragraph",
-        "content": "To offer multiple currencies on your online store, you must first [edit your store's currency formatting](https://docs.shopify.com/support/settings/general/tell-my-script-where-to-find-money-formats)."
+        "content": "To offer multiple currencies on your online store, you must first [edit your store's currency formatting](https:\/\/docs.shopify.com\/support\/settings\/general\/tell-my-script-where-to-find-money-formats)."
       },
       {
         "type": "checkbox",
@@ -386,7 +407,7 @@
         "id": "supported_currencies",
         "label": "Supported currencies",
         "default": "INR GBP CAD USD AUD EUR JPY",
-        "info": "Use the country's ISO [currency code](http://www.xe.com/iso4217.php). Separate your currency codes with a space."
+        "info": "Use the country's ISO [currency code](http:\/\/www.xe.com\/iso4217.php). Separate your currency codes with a space."
       },
       {
         "type": "text",

@@ -1,5 +1,5 @@
 <!-- /templates/collection.liquid -->
-{% paginate collection.products by 12 %}
+{% paginate collection.products by 20 %}
 
 {% comment %}
   Use .grid--rev so that the collection tags appear below the products on mobile
@@ -15,10 +15,10 @@
         <div class="grid__item large--one-half">
           <h1>{{ collection.title }}</h1>
         </div>
-        <div class="grid__item large--one-quarter">
+        <div class="grid__item medium--one-half large--one-quarter">
           {% include 'collection-nav' %}
         </div>
-        <div class="grid__item large--one-quarter">
+        <div class="grid__item medium--one-half large--one-quarter">
           {% include 'collection-sorting' %}
         </div>
       </div>
@@ -65,14 +65,14 @@
 
     </div>
 
-    {% if paginate.pages > 1 %}
-      <hr>
-      <div class="pagination">
-        {{ paginate | default_pagination | replace: '&laquo; Previous', '&larr;' | replace: 'Next &raquo;', '&rarr;' }}
-      </div>
+    {% if paginate.next %}
+        <div id="more" class="product"><p><a href="{{ paginate.next.url }}"></a></p></div>        
     {% endif %}
+
+    <div class="grid-uniform product-grid"><div id="product-list-foot"></div></div>
 
   </div>
 </div>
 
 {% endpaginate %}
+
